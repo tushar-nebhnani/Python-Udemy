@@ -1,30 +1,31 @@
-# inheritance
 class BaseChai:
     def __init__(self, type_):
-        self.type = type_
+        self.type_ = type_
 
     def prepare(self):
-        print(f"Preparing {self.type} Chai....")
+        print(f"Preparing: {self.type_} chai ...")
 
 class MasalaChai(BaseChai):
-    def add_spices(self):
-        print("Adding cardamon, ginger, cloves.")      
+    def add_species(self):
+        print(f"Adding cardamon, ginger & cloves.")
 
-class ChaiShope:
-    chai_class = BaseChai # inheriting values of the base chai: Composition Syntax
+class ChaiShop():
+    # Composition
+    chai_cls = BaseChai # reference of the base chai
 
     def __init__(self):
-        self.chai = self.chai_class("Regular") 
+        self.chai = self.chai_cls("Regular") # here the reference is passed to the chai. Internally (chai -> chai_cls -> BaseClass -> prepare)
 
     def serve(self):
-        print(f"Serving {self.chai.type} in the shop.")
+        print(f"Serving: {self.chai.type_} chai ...")
         self.chai.prepare()
 
-class FancyChaiShop(ChaiShope):
+class FancyChaiShop(ChaiShop):
     chai_cls = MasalaChai
 
-shop = ChaiShope()
+# Object are always created with the help of the constructor.
+shop = ChaiShop()
 fancy = FancyChaiShop()
 shop.serve()
 fancy.serve()
-fancy.chai.add_spices()
+fancy.chai.add_species()
