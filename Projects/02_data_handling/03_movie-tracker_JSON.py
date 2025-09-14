@@ -1,0 +1,76 @@
+"""
+    Personal Movie Tracker
+"""
+import os
+import json 
+
+FILENAME = "movies.json"
+
+def load_movies():
+    if not os.path.exists(FILENAME):
+        return []
+    with open(FILENAME, 'r', encoding='utf-8') as f:
+        return json.load(f)
+    
+def save_movies(movie):
+    # Structure inside the JSON 
+    # [
+    #     {
+    #         'title': 'movie_name', 
+    #         'genre': 'movie_name', 
+    #         'rating': 'movie_name', 
+    #     },
+    #     {},
+    #     {}
+    # ]
+    with open(FILENAME, 'w', encoding='utf-8') as f:
+        json.dump(movie, f, indent=2)
+
+def add_movies(movies):
+    title = input("Enter the movie name: ").strip().lower()
+    
+    # if movie already exist in the database
+    if any(movie["title"].lower() == title for movie in movies):
+        print("Movie already exists.")
+        return 
+    
+    genre = input("Enter the movie name: ").strip().lower()
+    try:
+        rating = float(input("Enter rating(0-10"))
+        if not(0 <= rating <= 10):
+            raise ValueError
+    except ValueError:
+        print("Please, enter a valid value.")
+
+    movies.append({"title": title, "genre": genre, "rating": rating})
+    save_movies(movies)
+    print("Movie Added✅.")
+
+def search_movie(movies):
+    term = input("Enter title or genre: ").strip().lower()
+
+    results = [
+        movie for movie in movies 
+        if term in movie['title'].lower() or term in movie['genre'].lower()
+    ]
+    if not results:
+        print("No matching result.")
+        return
+    print(f"Found {len(results)} result(s).")
+    
+    for movie in results:
+        print(f"{movie['title']} -- {movie['genre']} -- {movie['rating']}")
+
+def run_movie_db():
+    movies = load_movies()
+    while True:
+        print("1. Add")
+        print("2. View")
+        print("3. Search")
+        print("4. Exit")
+    
+        choice = input("Choose: ").strip()
+        match choice:
+            case "1": add_movies()
+            case "2": pass
+            case "3": search_movie()
