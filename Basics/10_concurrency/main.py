@@ -5,7 +5,7 @@
     Module: threading.Thread, asyncio
     Thread knows their entry points so even if don't mention the main function it will execute by itself.
 
-    Thread shines in i/o operation and web request.
+    Thread shines in i/o operation and web request. They can share memory with each other.
 
     Ex: Talking to a friend while making chai
 """
@@ -30,6 +30,7 @@
                 freeze_support()
                 ... 
     '
-
+    They do not share memory with each other.
+    
     Ex: Two people making chai
 """
