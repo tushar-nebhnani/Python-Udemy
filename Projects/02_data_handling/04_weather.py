@@ -6,11 +6,9 @@ import os
 import csv 
 from datetime import datetime
 import requests
-from dotenv import load_dotenv
 
-load_dotenv()
 FILENAME = "weather_logs.csv"
-API_KEY = os.getenv('API_KEY')
+API_KEY = '4bf7c868159ad3a644732493e4f8cffb'
 
 if not os.path.exists(FILENAME):
     with open(FILENAME, 'w', newline='', encoding='utf-8') as f:
@@ -27,9 +25,9 @@ def log_weather():
             if row['Date'] == date and row['City'].lower() == city.lower():
                 print("Entry for this city and date exists")
                 return
-    print(API_KEY)
     try:
-        URL = f"https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}&units=metric"
+        URL = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
+        
         response = requests.get(URL)
         response.raise_for_status()
         data = response.json()
@@ -42,14 +40,14 @@ def log_weather():
         condition = data['weather'][0]['main']
         description = data['weather'][0]['description']
 
-        with open(FILENAME, 'w', newline='', encoding='utf-8') as f:
+        with open(FILENAME, 'a', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             writer.writerow([date, city.title(), temp, condition, description])
 
             print(f"Logged: {temp} | {condition} | {description} for the city: {city}")
 
     except Exception as e:
-        print("Failed to make API call.")
+        print(f"Failed to make API call. {e}")
 
 def view_log():
     with open(FILENAME, 'r', encoding='utf-8') as f:

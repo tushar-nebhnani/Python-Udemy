@@ -10,3 +10,9 @@ quotes
 crypto_prices.csv
 crypto.db
 time.pdf
+weather_logs.csv
+nested_data.json
+weather_logs_json.json
+data_json.json
+converted.csv
+.env_data
