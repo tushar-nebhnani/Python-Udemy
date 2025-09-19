@@ -16,3 +16,6 @@ weather_logs_json.json
 data_json.json
 converted.csv
 .env_data
+youtube_comments.csv
+experience_salary.csv
+books.csv
