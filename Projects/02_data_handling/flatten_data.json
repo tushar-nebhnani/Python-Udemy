@@ -1,0 +1,16 @@
+{
+  "person.name": "John Doe",
+  "person.age": 30,
+  "person.isStudent": false,
+  "person.contact.email": "john.doe@example.com",
+  "person.contact.phone": "123-456-7890",
+  "person.address.street": "123 Main St",
+  "person.address.city": "Anytown",
+  "person.address.zipCode": "12345",
+  "person.courses.0.courseId": "CS101",
+  "person.courses.0.title": "Introduction to Programming",
+  "person.courses.0.credits": 3,
+  "person.courses.1.courseId": "MA202",
+  "person.courses.1.title": "Calculus II",
+  "person.courses.1.credits": 4
+}
